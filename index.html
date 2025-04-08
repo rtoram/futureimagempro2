@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FuturiEdit Pro</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="sidebar">
+        <h1>FuturiEdit Pro</h1>
+        <div class="tabs">
+            <button onclick="showTab('upload')">Upload</button>
+            <button onclick="showTab('basic')">Básico</button>
+            <button onclick="showTab('effects')">Efeitos</button>
+            <button onclick="showTab('tools')">Ferramentas</button>
+        </div>
+        
+        <!-- Aba Upload -->
+        <div id="upload" class="tab-content">
+            <label for="imageInput" class="button">Carregar Imagem</label>
+            <input type="file" id="imageInput" accept="image/*" style="display: none;" onchange="loadImage(event)">
+        </div>
+
+        <!-- Aba Básico -->
+        <div id="basic" class="tab-content" style="display:none;">
+            <div class="controls">
+                <label for="brightness">Brilho:</label>
+                <input type="range" id="brightness" min="-100" max="100" value="0" oninput="applyFilters()">
+                <label for="contrast">Contraste:</label>
+                <input type="range" id="contrast" min="-100" max="100" value="0" oninput="applyFilters()">
+                <label for="saturation">Saturação:</label>
+                <input type="range" id="saturation" min="0" max="200" value="100" oninput="applyFilters()">
+            </div>
+        </div>
+
+        <!-- Aba Efeitos -->
+        <div id="effects" class="tab-content" style="display:none;">
+            <div class="controls">
+                <button onclick="applyGrayscale()">Preto e Branco</button>
+                <button onclick="applySilhouette()">Silhueta</button>
+                <button onclick="applyColoredArea()">Área Colorida</button>
+                <label for="agingLevel">Envelhecimento:</label>
+                <select id="agingLevel" onchange="applyAging()">
+                    <option value="0">Nível 0</option>
+                    <option value="20">Nível 1</option>
+                    <option value="40">Nível 2</option>
+                    <option value="60">Nível 3</option>
+                    <option value="80">Nível 4</option>
+                    <option value="100">Nível 5</option>
+                </select>
+                <label for="paintEffectLevel">Efeito Pintura:</label>
+                <select id="paintEffectLevel" onchange="applyPaintEffect()">
+                    <option value="1">Nível 1</option>
+                    <option value="2">Nível 2</option>
+                    <option value="3">Nível 3</option>
+                    <option value="4">Nível 4</option>
+                    <option value="5">Nível 5</option>
+                </select>
+                <label for="hueRotateLevel">Rotação de Matiz:</label>
+                <select id="hueRotateLevel" onchange="applyHueRotate()">
+                    <option value="0">Nível 0</option>
+                    <option value="72">Nível 1</option>
+                    <option value="144">Nível 2</option>
+                    <option value="216">Nível 3</option>
+                    <option value="288">Nível 4</option>
+                    <option value="360">Nível 5</option>
+                </select>
+                <label for="invertLevel">Inversão de Cores:</label>
+                <select id="invertLevel" onchange="applyInvert()">
+                    <option value="0">Nível 0</option>
+                    <option value="0.2">Nível 1</option>
+                    <option value="0.4">Nível 2</option>
+                    <option value="0.6">Nível 3</option>
+                    <option value="0.8">Nível 4</option>
+                    <option value="1">Nível 5</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Aba Ferramentas -->
+        <div id="tools" class="tab-content" style="display:none;">
+            <div class="controls">
+                <button onclick="enableCrop()">Recortar</button>
+                <button onclick="undo()">Desfazer</button>
+                <button onclick="printImage()">Imprimir</button>
+                <button onclick="generatePDF()">Gerar PDF</button>
+            </div>
+        </div>
+
+        <button class="help-btn" onclick="showHelp()">Ajuda</button>
+    </div>
+
+    <div class="container">
+        <canvas id="imageCanvas"></canvas>
+    </div>
+
+    <div id="helpModal" style="display:none;">
+        <h2>Instruções de Uso</h2>
+        <p>Bem-vindo ao FuturiEdit Pro! Veja como usar:</p>
+        <ul>
+            <li><b>Upload:</b> Carregue sua imagem.</li>
+            <li><b>Básico:</b> Ajuste brilho, contraste e saturação.</li>
+            <li><b>Efeitos:</b> Aplique efeitos como preto e branco, silhueta, área colorida, envelhecimento, pintura, rotação de matiz e inversão de cores.</li>
+            <li><b>Ferramentas:</b> Recorte a imagem, desfaça ações, imprima ou gere um PDF.</li>
+        </ul>
+        <button onclick="hideHelp()">Fechar</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
