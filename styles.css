@@ -1,0 +1,138 @@
+:root {
+    --background-color: #1a1a1a;
+    --sidebar-color: #2a2a2a;
+    --text-color: #fff;
+    --highlight-color: #00ffcc; /* Neon cyan */
+    --button-bg: #444;
+    --button-hover-bg: #555;
+}
+
+body {
+    margin: 0;
+    display: flex;
+    height: 100vh;
+    background-color: var(--background-color);
+    font-family: Arial, sans-serif;
+    color: var(--text-color);
+}
+
+.sidebar {
+    width: 250px;
+    background-color: var(--sidebar-color);
+    padding: 20px;
+    box-shadow: 2px 0 10px rgba(0, 255, 204, 0.5);
+    overflow-y: auto;
+}
+
+.sidebar h1 {
+    font-size: 24px;
+    color: var(--highlight-color);
+    margin-bottom: 20px;
+}
+
+.tabs button, .controls button {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    background-color: var(--button-bg);
+    color: var(--text-color);
+    border: 1px solid var(--highlight-color);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.tabs button:hover, .controls button:hover {
+    background-color: var(--button-hover-bg);
+    box-shadow: 0 0 10px var(--highlight-color);
+}
+
+.tab-content {
+    margin-top: 20px;
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.controls label {
+    font-size: 14px;
+}
+
+.controls input, .controls select {
+    padding: 5px;
+    background-color: var(--button-bg);
+    color: var(--text-color);
+    border: 1px solid var(--highlight-color);
+    border-radius: 4px;
+}
+
+.container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+canvas {
+    max-width: 100%;
+    max-height: 80vh;
+    border: 1px solid var(--highlight-color);
+    background-color: #333;
+}
+
+#helpModal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--sidebar-color);
+    padding: 20px;
+    border: 2px solid var(--highlight-color);
+    box-shadow: 0 0 20px var(--highlight-color);
+    max-width: 90%;
+    display: none;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        z-index: 1000;
+        padding: 10px;
+    }
+    .container {
+        margin-bottom: 150px; /* Espaço para a sidebar */
+    }
+    .tabs {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .tabs button {
+        flex: 1 1 40%;
+        margin: 5px;
+    }
+    .tab-content {
+        margin-top: 10px;
+    }
+    canvas {
+        max-height: 60vh;
+    }
+}
+
+@media (max-width: 480px) {
+    .tabs button {
+        flex: 1 1 100%;
+    }
+    .controls label, .controls input, .controls select, .controls button {
+        font-size: 12px;
+    }
+}
+
